@@ -38,6 +38,10 @@ Java/Springの基本的な理解と、Controller・Model・View連携の把握�
 - `/form`：新規登録フォーム  
 - `/list`：一覧表示（削除ボタン付き）
 
+![新規登録フォームのスクリーンショット](images/form.png)
+
+![一覧表示画面のスクリーンショット](images/list.png)
+
 > デザインは機能重視の最低限。UXやレスポンシブ対応は今後拡張予定。
 
 ---
