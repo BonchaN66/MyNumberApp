@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>マイナンバー新規登録</title>
+</head>
+<body>
+<h1>新規登録フォーム</h1>
+<form th:action="@{/register}" th:object="${employee}" method="post">
+    <label>社員ID：</label>
+    <input type="text" th:field="*{id}" required /><br/>
+
+    <label>氏名：</label>
+    <input type="text" th:field="*{name}" required /><br/>
+
+    <label>マイナンバー（12桁）：</label>
+    <input type="text" th:field="*{myNumber}" pattern="\d{12}" required /><br/>
+
+    <label>備考：</label>
+    <textarea th:field="*{remarks}" rows="3" cols="30"></textarea><br/>
+
+    <button type="submit">登録</button>
+</form>
+<a href="/list">一覧へ戻る</a>
+</body>
+</html>
