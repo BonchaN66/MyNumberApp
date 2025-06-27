@@ -79,7 +79,7 @@ Java/Springの基本的な理解と、Controller・Model・View連携の把握�
 
 1. このリポジトリをクローン：
    ```bash
-   git clone https://github.com/your-username/MyNumberApp.git
+   git clone https://github.com/BonchaN66/MyNumberApp.git
    cd MyNumberApp
 
 2. Mavenビルド（IDE不要な場合）：   
