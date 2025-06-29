@@ -86,8 +86,9 @@ Java/Springの基本的な理解と、Controller・Model・View連携の把握�
    git clone https://github.com/BonchaN66/MyNumberApp.git
    cd MyNumberApp
 
-2. Mavenビルド（IDE不要な場合）：   
-./mvnw spring-boot:run
+2. Mavenビルド：   
+   MyNumberAPPをIDEで開いて　MyNumberApplication.java を実行
+   （省略　src/main/java/com/example/MyNumber/MyNumberApplication.java）
 
 3.ブラウザでアクセス：
 
