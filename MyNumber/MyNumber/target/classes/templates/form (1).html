@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>マイナンバー新規登録</title>
+    <style>
+        .container {
+          width: 400px;
+          margin: 40px auto;
+          padding: 20px;
+          border: 1px solid #ccc;
+          border-radius: 6px;
+          font-family: Arial, sans-serif;
+        }
+        label {
+          display: block;
+          margin-bottom: 6px;
+          font-weight: bold;
+        }
+        input[type="text"], input[type="number"] {
+          width: 100%;
+          padding: 8px;
+          margin-bottom: 16px;
+          border: 1px solid #aaa;
+          border-radius: 4px;
+          box-sizing: border-box;
+        }
+        button {
+          background-color: #3498db;
+          color: white;
+          border: none;
+          padding: 10px 18px;
+          border-radius: 4px;
+          cursor: pointer;
+          font-size: 16px;
+        }
+        button:hover {
+          background-color: #2980b9;
+        }
+        a {
+          display: inline-block;
+          margin-top: 12px;
+          text-decoration: none;
+          color: #555;
+        }
+        a:hover {
+          text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>マイナンバー新規登録</h1>
+    <form th:action="@{/add}" method="post">
+        <label for="name">氏名</label>
+        <input type="text" id="name" name="name" placeholder="例：山田太郎" required />
+
+        <label for="myNumber">マイナンバー</label>
+        <input type="text" id="myNumber" name="myNumber" placeholder="12桁の数字" pattern="\d{12}" title="12桁の数字を入力してください" required />
+
+        <button type="submit">登録</button>
+    </form>
+    <a href="/list">一覧に戻る</a>
+</div>
+</body>
+</html>

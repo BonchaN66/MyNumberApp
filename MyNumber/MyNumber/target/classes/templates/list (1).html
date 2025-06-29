@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>マイナンバー一覧</title>
+    <style>
+        table {
+          width: 80%;
+          margin: 20px auto;
+          border-collapse: collapse;
+        }
+        th, td {
+          padding: 8px 12px;
+          border: 1px solid #ccc;
+          text-align: left;
+        }
+        th {
+          background-color: #f2f2f2;
+        }
+        .delete-btn {
+          color: white;
+          background-color: #e74c3c;
+          border: none;
+          padding: 6px 12px;
+          cursor: pointer;
+          border-radius: 4px;
+        }
+        .delete-btn:hover {
+          background-color: #c0392b;
+        }
+        .container {
+          width: 90%;
+          margin: 0 auto;
+          text-align: center;
+        }
+        a {
+          display: inline-block;
+          margin: 20px 0;
+          text-decoration: none;
+          color: #3498db;
+          font-weight: bold;
+        }
+        a:hover {
+          text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>マイナンバー一覧</h1>
+    <a href="/form">新規登録へ</a>
+    <table>
+        <thead>
+        <tr>
+            <th>氏名</th>
+            <th>マイナンバー</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="employee : ${employees}">
+            <td th:text="${employee.name}">氏名</td>
+            <td th:text="${employee.myNumber}">123456789012</td>
+            <td>
+                <form th:action="@{/delete/{id}(id=${employee.id})}" method="post" style="display:inline;">
+                    <button type="submit" class="delete-btn">削除</button>
+                </form>
+            </td>
+        </tr>
+        <tr th:if="${#lists.isEmpty(employees)}">
+            <td colspan="3">登録データがありません</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
