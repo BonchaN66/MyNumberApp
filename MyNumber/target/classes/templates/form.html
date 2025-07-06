@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>マイナンバー新規登録</title>
+    <style>
+        body {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            max-width: 500px;
+            margin: 30px auto;
+            background: #fff;
+            padding: 20px 30px;
+            box-shadow: 0 0 8px rgba(0,0,0,0.1);
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #2c3e50;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+        label {
+            font-weight: 600;
+            color: #34495e;
+            margin-bottom: 6px;
+            display: block;
+        }
+        input[type="text"],
+        textarea {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+            width: 100%;
+            transition: border-color 0.3s ease;
+        }
+        input[type="text"]:focus,
+        textarea:focus {
+            border-color: #2980b9;
+            outline: none;
+            background-color: #eaf4fc;
+            box-shadow: 0 0 5px rgba(41, 128, 185, 0.5);
+        }
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+        button {
+            padding: 12px 24px;
+            background-color: #2980b9;
+            color: white;
+            font-weight: 700;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: fit-content;
+            align-self: flex-start;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #1c5980;
+        }
+        a {
+            color: #2980b9;
+            font-weight: 600;
+            text-decoration: none;
+            margin-top: 24px;
+            display: inline-block;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 600px) {
+            body {
+                margin: 15px;
+                padding: 15px 20px;
+            }
+            button {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+<h1>新規登録フォーム</h1>
+<form th:action="@{/register}" th:object="${employee}" method="post">
+    <label>社員ID：</label>
+    <input type="text" th:field="*{id}" required /><br/>
+
+    <label>氏名：</label>
+    <input type="text" th:field="*{name}" required /><br/>
+
+    <label>マイナンバー（12桁）：</label>
+    <input type="text" th:field="*{myNumber}" pattern="\d{12}" required /><br/>
+
+    <label>備考：</label>
+    <textarea th:field="*{remarks}" rows="3" cols="30"></textarea><br/>
+
+    <button type="submit">登録</button>
+</form>
+<a href="/list">一覧へ戻る</a>
+</body>
+</html>
