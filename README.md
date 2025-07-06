@@ -13,7 +13,7 @@ Java/Springの基本的な理解と、Controller・Model・View連携の把握�
 ## 🛠️ 使用技術
 
 - Java 17
-- Spring Boot 3.x
+- Spring Boot 3.x（安定性を求め適宜調整）
 - Thymeleaf
 - HTML5 / CSS（最低限）
 - IntelliJ IDEA
@@ -46,15 +46,16 @@ Java/Springの基本的な理解と、Controller・Model・View連携の把握�
 
 ---
 
-## ⚠️ 制限事項（意図的に省いた点）
+## ⚠️ 制限要素
 
 | 省略した要素 | 理由・補足 |
 |---------------|------------|
-| 永続化（DB/CSV） | 開発初期フェーズにつき、Javaの`ArrayList`を使用。今後はH2またはMySQLへ移行予定。 |
+| 永続化（DB/CSV） | プロトタイプとして、Javaの`ArrayList`を使用。今後H2またはMySQLへ移行。 |
 | 編集機能（Update） | 基本CRUDのC・R・Dを優先。更新機能は今後の実装候補。 |
-| 入力バリデーション | HTMLの制約（`required`や`pattern`）のみに留め、`@Valid`等は未導入。 |
-| 認証・認可（ログイン機能） | ローカル用途に限定しているため、セキュリティ機能は除外。 |
-| レスポンシブデザイン | 今回はサーバーサイドロジックに集中。UI拡張は後日対応予定。 |
+| 認証・認可（ログイン機能） | ローカル用途に限定しているため、セキュリティ機能は除外。今後拡張予定。 |
+| レスポンシブデザイン | 今回はPC表示に限定。 |
+| 入力バリデーション |　マイナンバーの文字数・データ形式チェックのみ　｜
+
 
 ---
 
@@ -65,7 +66,7 @@ Java/Springの基本的な理解と、Controller・Model・View連携の把握�
 - Spring Securityを用いたログイン機能の実装
 - 入力バリデーションの追加（`@Valid`, BindingResult 等）
 - 編集（Update）機能の実装
-- BootstrapなどでのUI改善
+- UI改善（マイナンバーの区切り、bootstrapの活用）
 
 ---
 
@@ -86,9 +87,8 @@ Java/Springの基本的な理解と、Controller・Model・View連携の把握�
    git clone https://github.com/BonchaN66/MyNumberApp.git
    cd MyNumberApp
 
-2. Mavenビルド：   
-   MyNumberAPPをIDEで開いて　MyNumberApplication.java を実行
-   （省略　src/main/java/com/example/MyNumber/MyNumberApplication.java）
+2. Mavenビルド、ローカルサーバ起動：
+   IDEでMyNumberApplication.java を実行
 
 3.ブラウザでアクセス：
 
