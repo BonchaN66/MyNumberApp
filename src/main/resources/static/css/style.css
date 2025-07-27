@@ -1,0 +1,212 @@
+/* ===================================
+   共通スタイル
+   - 全ページで利用する基本的な設定
+   - ボタンやリンクなど、再利用するUI部品
+   =================================== */
+* {
+    /* 全ての要素に適用し、paddingとborderを幅(width)に含める */
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background-color: #f4f7f6; /* 背景色を少しつけると影が映える */
+    color: #333;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin-top: 0;
+}
+
+a {
+    color: #2980b9;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* ページのコンテンツを囲む白いカード（共通） */
+.page-content {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+/* ボタン（共通） */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    color: white;
+    font-weight: 700;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 1rem;
+    text-align: center;
+    transition: background-color 0.2s ease;
+}
+
+/* 送信/登録ボタン (青) */
+.btn-submit {
+    background-color: #2980b9;
+}
+.btn-submit:hover {
+    background-color: #2471a3;
+}
+
+/* 削除ボタン (赤) */
+.btn-delete {
+    background-color: #e74c3c;
+    padding: 6px 14px; /* 小さめにする */
+    font-size: 0.9rem;
+}
+.btn-delete:hover {
+    background-color: #c0392b;
+}
+
+/* 編集ボタン（黄緑） */
+.btn-edit {
+    background-color: #2ecc71;
+    padding: 6px 14px;          /* 削除ボタンと同じサイズ */
+    font-size: 0.9rem;
+}
+.btn-edit:hover {
+    background-color: #27ae60;
+}
+
+/* 更新ボタン（黄緑） */
+.btn-update {
+    background-color: #2ecc71;
+    padding: 10px 20px;         /* 送信/登録ボタンと同じサイズ */
+    font-size: 1rem;
+}
+.btn-update:hover {
+    background-color: #27ae60;
+}
+
+/* ===================================
+   list.html用スタイル
+   =================================== */
+.list-page {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 30px;
+}
+
+/* テーブルを囲むコンテナ（レスポンシブ対応） */
+.table-container {
+    overflow-x: auto; /* テーブルがはみ出た場合に横スクロールを許可 */
+}
+
+.list-page table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 800px; /* スマホ表示でもテーブルの最小幅を確保 */
+}
+
+.list-page th,
+.list-page td {
+    border: 1px solid #ddd;
+    padding: 12px 16px;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.list-page th {
+    background-color: #34495e;
+    color: #fff;
+}
+
+.list-page tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* 削除ボタンのフォームの不要な余白を消す */
+.list-page td form {
+    display: inline;
+}
+
+/* 空データ時のメッセージ */
+.list-page td[colspan="6"] {
+    text-align: center;
+    font-style: italic;
+    color: #777;
+    padding: 30px 0;
+}
+
+
+/* ===================================
+   form.html用スタイル
+   =================================== */
+.form-page {
+    max-width: 550px;
+    margin: 30px auto;
+    padding: 30px 40px;
+}
+
+.form-page form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* 各フォーム要素をグループ化 */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    font-weight: 600;
+    color: #34495e;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.form-group input[type="text"],
+.form-group textarea {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    width: 100%;
+    transition: all 0.2s ease-in-out;
+}
+
+.form-group input[type="text"]:focus,
+.form-group textarea:focus {
+    border-color: #2980b9;
+    outline: none;
+    box-shadow: 0 0 8px rgba(41, 128, 185, 0.3);
+}
+
+.form-page textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.form-page .form-actions {
+    margin-top: 10px;
+}
+
+
+/* ===================================
+   レスポンシブスタイル
+   =================================== */
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+    .list-page, .form-page {
+        padding: 20px;
+    }
+    .btn {
+        width: 100%;
+    }
+}
