@@ -101,6 +101,7 @@ cd MyNumberApp
 |------|------|
 | 2025-07-20 | Spring Data JPA導入によりMySQL連携・DB永続化を実現 |
 | 2025-07-26 | 編集（Update）機能追加 → 基本CRUDを完全実装 |
+| 2025-07-31 | JUnitテストケースをEmployeeService.javaに追加 |
 
 ---
 
