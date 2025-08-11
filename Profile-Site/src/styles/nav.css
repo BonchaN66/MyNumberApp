@@ -1,0 +1,22 @@
+.nav {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.nav a {
+  font-size: 1.1rem;
+  padding: 0.1rem;
+  color: var(--text-light);
+  text-decoration: none;
+  font-weight: bold;
+  transition: color var(--transition-normal), transform var(--transition-fast);
+  display: inline-block;
+}
+
+.nav a:hover {
+  color: var(--hover-color);
+  transform: scale(1.2);
+}
