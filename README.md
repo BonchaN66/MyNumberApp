@@ -31,4 +31,4 @@ npm run build
 
 🌐 アクセス
 
-公開 URL　：　https://profile-site-2-0.vercel.app/
+公開 URL　：　bonchan-profile-site.vercel.app
