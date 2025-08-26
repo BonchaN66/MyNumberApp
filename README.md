@@ -1,26 +1,23 @@
-Profile-Site--2.0
+Profile-Site-2.0
 
-ポートフォリオサイトの第 2 版です。
-前バージョン（HTML / CSS / Vanilla JS）で作成した UI をベースに、使用技術を TypeScript + React + Vite に更新しました。
-更新理由は、UX に富んだ SPA（Single Page Application）開発の学習と、モダンなフロントエンド技術の習得です。
+自己紹介サイト第2版。
+前バージョン（HTML/CSS/Vanilla JS）の UI をベースに、TypeScript + React + Vite + Tailwind CSS に刷新し、モダンフロントエンド技術の習得 と UX 改善 を目的に開発しました。
 
 🚀 技術スタック
+分野	技術	ポイント・学習内容
+フロントエンド	TypeScript
+	React 18	SPA コンポーネント設計
+	Vite	
+	Tailwind CSS	
+ デプロイ	Vercel
+ 
+✨ 学習・工夫ポイント
 
-TypeScript
+型安全性の導入：TypeScript を導入して堅牢性を確保
 
-React 18
+コンポーネント設計：components / pages / styles に分割し再利用性と保守性を向上
 
-Vite
-
-Tailwind CSS
-
-✨ 学習と工夫した点
-
-型安全性：TypeScript を導入し、開発効率と堅牢性を向上
-
-ディレクトリ設計：components / pages / styles を分離し、再利用性を意識
-
-UX 改善：アニメーションを追加
+UX 改善：Tailwind + React でアニメーション実装、SPA の体験を強化
 
 🔧 開発環境セットアップ
 # 依存関係のインストール
@@ -32,12 +29,6 @@ npm run dev
 # 本番ビルド
 npm run build
 
-※ ビルド成果物は .gitignore により管理外に設定しています。
+🌐 アクセス
 
-📌 今後の更新予定
-
-Node.js によるバックエンド処理の追加
-
-React を用いたスクロールアニメーションの実装
-
-外部 API との連携
+公開 URL　：　https://profile-site-2-0.vercel.app/
