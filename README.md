@@ -1,4 +1,6 @@
-Profile-Site-2.0
+#Profile-Site-2.0
+
+https://bonchan-profile-site.vercel.app
 
 自己紹介サイト第2版。
 前バージョン（HTML/CSS/Vanilla JS）の UI をベースに、TypeScript + React + Vite + Tailwind CSS に刷新し、モダンフロントエンド技術の習得 と UX 改善 を目的に開発しました。
@@ -32,8 +34,4 @@ npm run dev
 ```bash
 npm run build
 ```
-
-🌐 アクセス
-
-公開 URL　：　https://bonchan-profile-site.vercel.app
 
