@@ -21,14 +21,15 @@ UX 改善：Tailwind + React でアニメーション実装、SPA の体験を�
 
 🔧 開発環境セットアップ
 # 依存関係のインストール
-npm install
+(npm install)
 
 # 開発サーバー起動
-npm run dev
+(npm run dev)
 
 # 本番ビルド
-npm run build
+(npm run build)
 
 🌐 アクセス
 
-公開 URL　：　bonchan-profile-site.vercel.app
+公開 URL　：　(https://bonchan-profile-site.vercel.app)
+
