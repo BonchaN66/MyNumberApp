@@ -83,6 +83,7 @@ export default function LandingWithHero() {
             {/* ナビゲーション */}
             <nav className="mt-8 text-center items-center mx-auto">
               <ul className="inline-flex space-x-6 text-lg md:text-xl font-medium">
+                {/* ↑なんか怒られてるけど動く、前はこれでエラー吐かなかった */}
                 <li>
                   <a href="#message" className="nav-link">
                     Message
