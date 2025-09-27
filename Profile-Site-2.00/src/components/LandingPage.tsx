@@ -56,11 +56,9 @@ export default function LandingWithHero() {
               scale: { duration: 18, ease: "easeInOut" },
             }}
           />
-
           {/* グラデーションオーバーレイ */}
           <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
-
-          {/* テキスト（二段タイトル） */}
+          テキスト（二段タイトル）
           <div className="relative z-10 flex flex-col justify-center h-full w-full px-100">
             <motion.h1
               className="text-6xl md:text-7xl font-extrabold drop-shadow-lg text-[white]"
@@ -83,7 +81,6 @@ export default function LandingWithHero() {
             {/* ナビゲーション */}
             <nav className="mt-8 text-center items-center mx-auto">
               <ul className="inline-flex space-x-6 text-lg md:text-xl font-medium">
-                {/* ↑なんか怒られてるけど動く、前はこれでエラー吐かなかった */}
                 <li>
                   <a href="#message" className="nav-link">
                     Message
