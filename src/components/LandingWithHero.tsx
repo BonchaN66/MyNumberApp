@@ -32,8 +32,8 @@ export default function LandingWithHero() {
     // イントロ完了後、かつ自動スクロールがまだ実行されていない場合のみ監視を開始
     if (showIntro || hasAutoScrolled) return;
 
-    // 💡 監視するスクロール位置の閾値 (例: 画面高さの約1/5)
-    const SCROLL_THRESHOLD = window.innerHeight * 0.15;
+    // 💡 監視するスクロール位置の閾値 (例: 画面高さの約1/10)
+    const SCROLL_THRESHOLD = window.innerHeight * 0.1;
     const AUTOSCROLL_DURATION = 1200; // 自動スクロールの速度 (1.2秒)
 
     const handleScroll = () => {
@@ -61,7 +61,7 @@ export default function LandingWithHero() {
 
   return (
     // 注意: ここに残っている overflow-hidden は、アニメーション完了後に削除推奨です
-    <div className="relative w-full h-screen overflow-hidden">
+    <div className="relative w-full h-screen ">
       {/* イントロ */}
       <AnimatePresence>
         {showIntro && (
@@ -87,7 +87,8 @@ export default function LandingWithHero() {
       {/* HeroHeader */}
 
       {!showIntro && (
-        <header className="absolute w-full h-screen overflow-hidden">
+        // absolute -> relative に変更
+        <header className="relative w-full h-screen overflow-hidden">
           {/* 背景画像（Ken Burns効果 + フェードイン） */}
           <motion.div
             className="fixed inset-0 bg-cover bg-center -z-30"
