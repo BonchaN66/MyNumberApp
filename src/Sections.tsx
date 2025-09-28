@@ -45,7 +45,7 @@ export default function Sections() {
       </div>
 
       {/* セクション本体 */}
-      <div className="relative flex flex-col gap-20 px-4 md:px-10">
+      <div className="relative flex flex-col gap-12 md:gap-20 px-4 lg:px-24">
         {sections.map((sec, idx) => {
           const Component = sec.component;
           return (

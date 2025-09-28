@@ -12,8 +12,15 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 2.5rem;
+  gap: 2rem;
   margin: 0;
+}
+
+@media (min-width: 768px) {
+  /* mdブレイクポイント相当 (タブレット以上) */
+  .social-links {
+    gap: 2.5rem;
+  }
 }
 
 .social-links a {

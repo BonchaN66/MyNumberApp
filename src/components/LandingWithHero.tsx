@@ -66,7 +66,9 @@ export default function LandingWithHero() {
       <AnimatePresence>
         {showIntro && (
           <motion.div
-            className="fixed inset-0 flex flex-col items-center justify-center bg-green-700 text-yellow-300 text-4xl font-bold z-20"
+            className="fixed inset-0 flex flex-col items-start md:text-4xl md:items-center justify-center px-10 
+            bg-green-700 text-yellow-300 text-2xl font-bold z-20"
+            // items-start + px-10で無理やりスマホ時に中央表示を実現
             initial={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 2.0, ease: "easeInOut" }}
@@ -104,7 +106,7 @@ export default function LandingWithHero() {
           {/* 3段タイトル */}
           <div className="relative flex flex-col items-center justify-center h-full w-full text-center gap-6">
             <motion.h1
-              className="text-6xl md:text-7xl font-extrabold drop-shadow-lg text-white transform -translate-x-28"
+              className="text-5xl md:text-7xl font-extrabold drop-shadow-lg text-white transform md:-translate-x-28"
               initial={{ opacity: 0, x: -60 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1.8, ease: "easeOut", delay: 0.3 }}
@@ -113,7 +115,7 @@ export default function LandingWithHero() {
             </motion.h1>
 
             <motion.h1
-              className="text-6xl md:text-7xl font-extrabold drop-shadow-lg text-white transform translate-x-28"
+              className="text-5xl md:text-7xl font-extrabold drop-shadow-lg text-white transform md:translate-x-28"
               initial={{ opacity: 0, x: 60 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1.8, ease: "easeOut", delay: 0.6 }}
@@ -132,7 +134,8 @@ export default function LandingWithHero() {
 
             {/* ナビゲーション */}
             <nav className="mt-8 text-center items-center mx-auto">
-              <ul className="inline-flex space-x-6 text-lg md:text-xl font-medium">
+              {/* 💡 レスポンシブなレイアウトと間隔の切り替え */}
+              <ul className="flex flex-col space-y-4 md:inline-flex md:flex-row md:space-x-6 text-lg md:text-xl font-medium">
                 <li>
                   <a
                     href="#message"
