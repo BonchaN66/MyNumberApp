@@ -3,33 +3,24 @@
    =============================== */
 @import "tailwindcss";
 
+/* --- CSS Variables --- */
 :root {
   --main-color: #376c39;
   --hover-color: #00a9c7;
-  --bg-dark: #242424;
   --text-light: #ffffff;
-  /* --text-light: #e2f4e1; */
-  --accent-color: #ffffff;
-
   --font-primary: "Helvetica Neue", sans-serif;
   --font-heading: "Cormorant Garamond", serif;
-
   --transition-fast: 0.2s ease-in-out;
   --transition-normal: 0.3s ease-in-out;
   --border-radius: 8px;
 }
 
-/* === Reset & Base === */
+/* --- Global Reset & Base Elements --- */
 body {
   margin: 0;
   font-family: var(--font-primary);
   color: var(--text-light);
-
-  background-image: url("img/b-g.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed; /* スクロールしても背景固定 */
+  /* background-image: url("../../public/img/b-g.jpg"); */
 }
 
 img {
@@ -39,19 +30,26 @@ img {
   border-radius: var(--border-radius);
 }
 
+/* --- Typography --- */
 h1,
 h2 {
-  font-family: var(--font-heading);
+  font-family: var(--font-heading); /* 見出しフォントの指定 */
 }
+
 h2 {
-  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-size: clamp(1.5rem, 4vw, 2.5rem); /* レスポンシブなサイズ調整 */
   margin-bottom: 1rem;
 }
 
+/* ===============================
+   Component Styles
+   =============================== */
+
+/* --- Navigation Link --- */
 .nav-link {
   font-size: 1.5rem;
   padding: 0.1rem;
-  color: #adc7ab;
+  color: #83b180; /* ナビリンクのデフォルトカラー */
   text-decoration: none;
   font-weight: bold;
   transition: color var(--transition-normal), transform var(--transition-fast);
@@ -59,25 +57,29 @@ h2 {
 }
 
 .nav-link:hover {
-  color: var(--hover-color);
-  transform: scale(1.15);
+  color: var(--hover-color); /* ホバーでアクセントカラーに変化 */
+  transform: scale(1.15); /* ホバーでわずかに拡大するアニメーション */
 }
 
-/* LandingPage-cursor */
+/* --- LandingPage-cursor (TypeAnimationのカーソル) --- */
 .type-animation::after {
   content: "|";
   color: red; /* カーソル赤色 */
   animation: blink 1s infinite;
 }
 
+/* ===============================
+   Keyframes (アニメーション定義)
+   =============================== */
+
 @keyframes blink {
   0%,
   50% {
-    opacity: 1;
+    opacity: 1; /* カーソル表示 */
   }
   51%,
   100% {
-    opacity: 0;
+    opacity: 0; /* カーソル非表示 */
   }
 }
 
@@ -87,14 +89,6 @@ h2 {
     transform: translateY(0px);
   }
   50% {
-    transform: translateY(-8px); /* ほんの少し浮く */
+    transform: translateY(-8px); /* 要素が上下にわずかに浮遊するアニメーション */
   }
-}
-
-/* === Container === */
-.container {
-  width: min(98%, 1350px);
-  margin-inline: auto;
-  padding: 1rem;
-  overflow: hidden;
 }

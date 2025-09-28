@@ -1,15 +1,13 @@
-import LandingPage from "./components/LandingPage";
 import Section from "./Sections";
 import Footer from "./components/Footer";
+import LandingWithHero from "./components/LandingWithHero";
 
-const App = () => {
+export const App = () => {
   return (
     <>
-      <LandingPage /> {/* ランディング→ヒーローヘッダーを包括 */}
+      <LandingWithHero /> {/* LandingPage + HeroHeader */}
       <Section />
       <Footer />
     </>
   );
 };
-
-export default App; //export const App = () => {}でリファクタ検討
