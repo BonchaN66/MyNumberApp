@@ -61,13 +61,13 @@ export default function LandingWithHero() {
 
   return (
     // 注意: ここに残っている overflow-hidden は、アニメーション完了後に削除推奨です
-    <div className="fixed w-full h-screen ">
+    <div className="relative w-full h-[100dvh] ">
       {/* イントロ */}
       <AnimatePresence>
         {showIntro && (
           <motion.div
-            className="relative inset-0 flex flex-col items-start md:text-4xl md:items-center justify-center px-10 
-            bg-green-700 text-yellow-300 text-2xl font-bold z-20"
+            className="fixed inset-0 flex flex-col items-start md:text-4xl md:items-center justify-center px-10 
+            bg-green-700 text-yellow-300 text-2xl font-bold z-50"
             // items-start + px-10で無理やりスマホ時に中央表示を実現
             initial={{ opacity: 1 }}
             exit={{ opacity: 0 }}
