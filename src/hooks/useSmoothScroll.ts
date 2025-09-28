@@ -1,12 +1,18 @@
 // ナビのリンクをクリックしたときに、スムーズスクロールを実現するためのカスタムフック
 
 const useSmoothScroll = () => {
-  // 💡 イージング関数の定義（一定速度→ゆっくり終わる）
-  // t: 経過時間、b: 開始値、c: 変化量、d: 期間
-  // ここでは progress (0から1) を引数とする形式に変換
-  const easeOutQuart = (progress: number) => {
-    return 1 - Math.pow(1 - progress, 5); // 5乗（Quart）
+  // 💡 新しいイージング関数の定義（ゆっくり始まって、速く終わる）
+  const easeInQuart = (progress: number) => {
+    // 4乗（Quart）を使用
+    return progress * progress * progress * progress;
   };
+
+  // 元の easeOutQuart は slow-end のため、ここで削除または名前を変更
+  /*
+  const easeOutQuart = (progress: number) => {
+    return 1 - Math.pow(1 - progress, 5);
+  };
+  */
 
   const easeInOutCubic = (progress: number) => {
     return progress < 0.5
@@ -14,11 +20,12 @@ const useSmoothScroll = () => {
       : 1 - Math.pow(-2 * progress + 2, 3) / 2;
   };
 
-  // 💡 イージングの種類を選択できる引数を追加
+  // 💡 イージングの種類を選択できる引数を更新
   const scrollToWithDuration = (
     targetId: string,
     duration: number,
-    easingType: "easeOutQuart" | "easeInOutCubic" = "easeInOutCubic"
+    // 選択肢を更新: easeInQuart を追加
+    easingType: "easeInQuart" | "easeInOutCubic" = "easeInOutCubic"
   ) => {
     const targetElement = document.getElementById(targetId);
     if (!targetElement) return;
@@ -41,8 +48,8 @@ const useSmoothScroll = () => {
       let easedProgress;
 
       // 💡 選択されたイージング関数を適用
-      if (easingType === "easeOutQuart") {
-        easedProgress = easeOutQuart(progress);
+      if (easingType === "easeInQuart") {
+        easedProgress = easeInQuart(progress);
       } else {
         easedProgress = easeInOutCubic(progress);
       }

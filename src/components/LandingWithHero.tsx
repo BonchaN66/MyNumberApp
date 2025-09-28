@@ -33,14 +33,14 @@ export default function LandingWithHero() {
     if (showIntro || hasAutoScrolled) return;
 
     // 💡 監視するスクロール位置の閾値 (例: 画面高さの約1/5)
-    const SCROLL_THRESHOLD = window.innerHeight * 0.2;
-    const AUTOSCROLL_DURATION = 2800; // 自動スクロールの速度 (2.8秒)
+    const SCROLL_THRESHOLD = window.innerHeight * 0.15;
+    const AUTOSCROLL_DURATION = 1200; // 自動スクロールの速度 (1.2秒)
 
     const handleScroll = () => {
       // ユーザーが閾値を超えてスクロールしたら
       if (window.scrollY > SCROLL_THRESHOLD && !hasAutoScrolled) {
         // 1. 自動スクロールを実行
-        scrollToWithDuration("message", AUTOSCROLL_DURATION, "easeOutQuart"); // ゆっくり終わるイージングを使用
+        scrollToWithDuration("message", AUTOSCROLL_DURATION, "easeInQuart"); // ゆっくり始まるイージングを使用
 
         // 2. フラグを立てて、二度と実行されないようにする
         setHasAutoScrolled(true);
