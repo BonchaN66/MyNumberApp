@@ -17,7 +17,6 @@
 
 /* --- Global Reset & Base Elements --- */
 body {
-  margin: 0;
   font-family: var(--font-primary);
   color: var(--text-light);
   /* background-image: url("../../public/img/b-g.jpg"); */
