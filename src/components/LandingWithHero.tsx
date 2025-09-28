@@ -90,7 +90,7 @@ export default function LandingWithHero() {
         // absolute -> relative に変更
         <header className="relative w-full h-screen overflow-hidden">
           {/* 背景画像（Ken Burns効果 + フェードイン） */}
-          <motion.div
+          {/* <motion.div
             className="fixed inset-0 bg-cover bg-center -z-30"
             style={{
               backgroundImage: "url('./img/first-view.jpg')",
@@ -101,7 +101,7 @@ export default function LandingWithHero() {
               opacity: { duration: 2, ease: "easeInOut" },
               scale: { duration: 18, ease: "easeInOut" },
             }}
-          />
+          /> */}
           {/* 背景にグラデーション */}
           <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
           {/* 3段タイトル */}
