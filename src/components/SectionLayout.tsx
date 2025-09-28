@@ -22,7 +22,7 @@ const SectionLayout: React.FC<SectionLayoutProps> = ({ imgSrc, reverse, children
     <motion.div
       // 修正: justify-between -> justify-center に変更し、gapを大きくする
       className={`
-        flex items-center justify-center gap-16
+        w-auto flex items-center justify-center gap-16
         max-md:flex-col max-md:items-center max-md:gap-8 pt-20 pb-20
         ${reverse ? "flex-row-reverse" : "flex-row"}
       `}
