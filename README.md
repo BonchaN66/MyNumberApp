@@ -1,6 +1,6 @@
 # Profile-Site-2.0
 
-[Live Demo](https://bonchan-profile-site.vercel.app)  
+[https://bonchan-profile-site.vercel.app](https://bonchan-profile-site.vercel.app)  
 
 ## 🚀 概要  
 自己紹介サイト第2版。  
