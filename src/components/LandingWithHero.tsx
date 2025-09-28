@@ -61,7 +61,7 @@ export default function LandingWithHero() {
 
   return (
     // 注意: ここに残っている overflow-hidden は、アニメーション完了後に削除推奨です
-    <div className="relative">
+    <div className="relative w-full h-full">
       {/* イントロ */}
       <AnimatePresence>
         {showIntro && (
