@@ -66,7 +66,7 @@ export default function LandingWithHero() {
       <AnimatePresence>
         {showIntro && (
           <motion.div
-            className="fixed inset-0 flex flex-col items-start md:text-4xl md:items-center justify-center px-10 
+            className="fixed inset-0 flex flex-col items-start md:text-4xl md:items-center justify-center px-8 
             bg-green-700 text-yellow-300 text-2xl font-bold z-50"
             // items-start + px-10で無理やりスマホ時に中央表示を実現
             initial={{ opacity: 1 }}
