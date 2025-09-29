@@ -19,28 +19,12 @@
 body {
   font-family: var(--font-primary);
   color: var(--text-light);
-  /* background-image: url("../../public/img/b-g.jpg"); */
-}
-
-/* Reset for full-bleed sections on mobile */
-html,
-body,
-#root {
-  height: 100%;
-  margin: 0;
 }
 
 /* iOS safe area support (optional) */
 body {
   padding-top: env(safe-area-inset-top);
   padding-bottom: env(safe-area-inset-bottom);
-}
-
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-  border-radius: var(--border-radius);
 }
 
 /* --- Typography --- */

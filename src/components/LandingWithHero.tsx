@@ -61,7 +61,7 @@ export default function LandingWithHero() {
 
   return (
     // 注意: ここに残っている overflow-hidden は、アニメーション完了後に削除推奨です
-    <div className="relative w-full h-[100dvh] ">
+    <div className="relative w-full h-[100dvh]">
       {/* イントロ */}
       <AnimatePresence>
         {showIntro && (
@@ -88,7 +88,7 @@ export default function LandingWithHero() {
 
       {!showIntro && (
         // absolute -> relative に変更
-        <header className="relative w-full h-screen overflow-hidden">
+        <header className="relative w-full h-[100dvh] overflow-hidden">
           {/* 背景画像（Ken Burns効果 + フェードイン） */}
           <motion.div
             className="fixed inset-0 bg-cover bg-center -z-30"
