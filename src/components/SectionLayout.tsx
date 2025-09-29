@@ -11,9 +11,9 @@ interface SectionLayoutProps {
 
 // 画像/テキストのアニメーションを定義
 const layoutVariants = {
-  left: { opacity: 0, x: -70 },
-  right: { opacity: 0, x: 70 },
-  visible: { opacity: 1, x: 0, transition: { duration: 1.6, ease: easeInOut } },
+  left: { opacity: 0, x: -60 },
+  right: { opacity: 0, x: 60 },
+  visible: { opacity: 1, x: 0, transition: { duration: 1.4, ease: easeInOut } },
 };
 
 const SectionLayout: React.FC<SectionLayoutProps> = ({ imgSrc, reverse, children }) => {
@@ -29,7 +29,7 @@ const SectionLayout: React.FC<SectionLayoutProps> = ({ imgSrc, reverse, children
       initial={reverse ? "right" : "left"}
       whileInView="visible"
       variants={layoutVariants}
-      viewport={{ once: true, amount: 0.4 }} // ビューポートに40%入ったら発火
+      viewport={{ once: true, amount: 0.25 }} // ビューポートに25%入ったら発火
     >
       {/* 2. テキストラッパー (子のコンテンツを受け取る) */}
       <div

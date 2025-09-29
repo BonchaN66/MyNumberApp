@@ -36,7 +36,7 @@ export default function Sections() {
   ];
 
   return (
-    <main className="relative bg-[url('/img/b-g.jpg')] bg-cover bg-center mb:bg-fixed py-30">
+    <main className="relative bg-[url('/img/b-g.jpg')] bg-cover bg-center md:bg-fixed py-30">
       {/* ↑ py-30でセクション(body全体)上下に余白追加 */}
 
       {/* 水玉 */}

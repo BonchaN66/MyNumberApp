@@ -91,9 +91,9 @@ export default function LandingWithHero() {
         <header className="relative w-full h-[100dvh] overflow-hidden">
           {/* 背景画像（Ken Burns効果 + フェードイン） */}
           <motion.div
-            className="fixed inset-0 bg-cover bg-center -z-30"
+            className="absolute md:fixed inset-0 bg-cover bg-center -z-30"
             style={{
-              backgroundImage: "url('./img/first-view.jpg')",
+              backgroundImage: "url('/img/first-view.jpg')",
             }}
             initial={{ opacity: 0, scale: 1 }}
             animate={{ opacity: 1, scale: 1.3 }}
