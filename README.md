@@ -80,10 +80,11 @@ Java/Springの基本的な理解と、Controller・Model・View連携の実践�
 ## 🚀 実行方法（ローカル）
 
 1. このリポジトリをクローン
-   bash'''
+PowerShell
+``` 
 git clone https://github.com/BonchaN66/MyNumberApp.git
 cd MyNumberApp
-'''
+```
 3. MySQLを起動・準備  
 - DB作成（例：`mynumber_db`）  
 - `application.properties` にDB接続情報を記述  
