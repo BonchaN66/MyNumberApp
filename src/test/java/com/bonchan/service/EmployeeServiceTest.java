@@ -8,29 +8,37 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-@ExtendWith(MockitoExtension.class) // Mockitoの拡張機能を使ってテストを実行するための設定
+/**
+ * EmployeeService の単体テストクラス
+ *
+ * Repository をモック化し、Service 単体の振る舞いを検証する。
+ * コメントは「前準備 / 実行 / 確認」（Given / When / Then）の形式で整理。
+ */
+@ExtendWith(MockitoExtension.class)
 public class EmployeeServiceTest {
 
-    @Mock // EmployeeRepositoryのモック（テスト用のダミー）を作成
+    @Mock
     private EmployeeRepository repository;
 
-    @InjectMocks // EmployeeServiceのインスタンスを作成し、@Mockのモックを注入する
+    @InjectMocks
     private EmployeeService service;
 
     // ----------------------------------------------
-    // 正常系テスト（期待通りに動く場合のテスト）
+    // 正常系テスト
     // ----------------------------------------------
 
-    @Test // [一覧取得] findAll()で社員リストが返ることをテスト
+    /**
+     * [一覧取得] findAll() で社員リストが返ることを確認するテスト
+     */
+    @Test
     public void testGetAllEmployees() {
-        // テスト用の社員オブジェクトを作成し、リストにまとめる
+        // 前準備 (Given): テスト用の社員データとモックの戻り値を設定
         Employee emp1 = new Employee();
         emp1.setId(1L);
         emp1.setName("佐藤");
@@ -42,74 +50,125 @@ public class EmployeeServiceTest {
         emp2.setMyNumber("987654321098");
 
         List<Employee> mockList = List.of(emp1, emp2);
-
-        // repository.findAll()が呼ばれたらmockListを返すように設定
         when(repository.findAll()).thenReturn(mockList);
 
-        // サービスのgetAllEmployees()を呼び出し、結果を受け取る
+        // 実行 (When): getAllEmployees() を呼び出し
         List<Employee> result = service.getAllEmployees();
 
-        // 結果の検証：社員リストのサイズが2であることをチェック
+        // 確認 (Then): 件数と内容が期待通りであること
         assertEquals(2, result.size());
-        // 先頭の社員の名前が「佐藤」であることをチェック
         assertEquals("佐藤", result.get(0).getName());
     }
 
-    @Test // [個別取得] findById()で該当の社員が取得できることをテスト
+    /**
+     * [個別取得] findById() で該当の社員が取得できることを確認するテスト
+     */
+    @Test
     public void testFindById_found() {
-        // 期待する社員オブジェクトを作成
+        // 前準備 (Given): 存在する社員を設定
         Employee emp = new Employee();
         emp.setId(1L);
         emp.setName("田中");
         emp.setMyNumber("111111111111");
-
-        // repository.findById(1L)が呼ばれたらempを返すように設定
         when(repository.findById(1L)).thenReturn(Optional.of(emp));
 
-        // サービスのfindById()を呼び出す
+        // 実行 (When)
         Employee result = service.findById(1L);
 
-        // 結果がnullでないことをテスト（社員が見つかった）
+        // 確認 (Then)
         assertNotNull(result);
-        // 社員名が「田中」であることをテスト
         assertEquals("田中", result.getName());
     }
 
-    @Test // [登録処理] register()でregisteredAtがセットされ、save()が呼ばれることをテスト
-    public void testRegister_callsSave() {
-        // 空の社員オブジェクトを作成
+    /**
+     * [登録成功] register() が true を返し、
+     * registeredAt がセットされ save() が呼ばれることを確認するテスト
+     */
+    @Test
+    public void testRegister_success_setsRegisteredAt_andSaves() {
+        // 前準備 (Given): 重複が無い状態を設定
         Employee emp = new Employee();
+        emp.setEmployeeCode("E100");
+        emp.setName("山田太郎");
+        emp.setMyNumber(""); // 未入力扱い
+        when(repository.existsByEmployeeCode("E100")).thenReturn(false);
 
-        // 登録処理を呼び出す（登録日時をセットして保存する）
-        service.register(emp);
+        // 実行 (When)
+        boolean result = service.register(emp);
 
-        // 登録日時がセットされていることをテスト
+        // 確認 (Then)
+        assertTrue(result);
         assertNotNull(emp.getRegisteredAt());
-        // repository.save()が1回だけ呼ばれたか検証
         verify(repository, times(1)).save(emp);
     }
 
-    @Test // [削除処理] deleteById()でdeleteById()が1回呼ばれることをテスト
+    /**
+     * [登録失敗] 従業員コードが重複している場合、false を返し save() は呼ばれない
+     */
+    @Test
+    public void testRegister_duplicateEmployeeCode_returnsFalse_andNoSave() {
+        // 前準備 (Given)
+        Employee emp = new Employee();
+        emp.setEmployeeCode("E001");
+        emp.setName("山田");
+        when(repository.existsByEmployeeCode("E001")).thenReturn(true);
+
+        // 実行 (When)
+        boolean result = service.register(emp);
+
+        // 確認 (Then)
+        assertFalse(result);
+        verify(repository, never()).save(any());
+    }
+
+    /**
+     * [登録失敗] マイナンバーが重複している場合、false を返し save() は呼ばれない
+     */
+    @Test
+    public void testRegister_duplicateMyNumber_returnsFalse_andNoSave() {
+        // 前準備 (Given)
+        Employee emp = new Employee();
+        emp.setEmployeeCode("E002");
+        emp.setName("佐藤");
+        emp.setMyNumber("123456789012");
+        when(repository.existsByEmployeeCode("E002")).thenReturn(false);
+        when(repository.existsByMyNumber("123456789012")).thenReturn(true);
+
+        // 実行 (When)
+        boolean result = service.register(emp);
+
+        // 確認 (Then)
+        assertFalse(result);
+        verify(repository, never()).save(any());
+    }
+
+    /**
+     * [削除処理] deleteById() でリポジトリの deleteById() が呼ばれることを確認するテスト
+     */
+    @Test
     public void testDeleteById_callsDelete() {
+        // 前準備 (Given)
         Long id = 1L;
 
-        // 削除処理を呼び出す
+        // 実行 (When)
         service.deleteById(id);
 
-        // repository.deleteById()が1回だけ呼ばれたか検証
+        // 確認 (Then)
         verify(repository, times(1)).deleteById(id);
     }
 
-    @Test // [更新成功] updateEmployee()で既存社員の情報が更新されることをテスト
+    /**
+     * [更新成功] updateEmployee() で既存社員が正しく更新され OK を返すことを確認するテスト
+     */
+    @Test
     public void testUpdateEmployee_success() {
-        // 既存社員オブジェクト（更新前）
+        // 前準備 (Given)
         Employee existing = new Employee();
         existing.setId(1L);
         existing.setName("旧名");
         existing.setMyNumber("000000000000");
         existing.setEmployeeCode("E001");
 
-        // 更新用社員オブジェクト（更新後の情報）
         Employee updated = new Employee();
         updated.setId(1L);
         updated.setName("新名");
@@ -117,66 +176,112 @@ public class EmployeeServiceTest {
         updated.setEmployeeCode("E002");
         updated.setRemarks("備考更新");
 
-        // repository.findById()は既存社員を返すように設定
         when(repository.findById(1L)).thenReturn(Optional.of(existing));
-        // repository.save()は更新後の社員を返すように設定（モックの動作）
         when(repository.save(any(Employee.class))).thenReturn(updated);
 
-        // updateEmployee()を呼び出す（既存社員が更新される）
-        service.updateEmployee(updated);
+        // 実行 (When)
+        String status = service.updateEmployee(updated);
 
-        // フィールドが更新されているかチェック
+        // 確認 (Then)
+        assertEquals("OK", status);
         assertEquals("新名", existing.getName());
         assertEquals("123456789012", existing.getMyNumber());
         assertEquals("E002", existing.getEmployeeCode());
         assertEquals("備考更新", existing.getRemarks());
-
-        // findById()が1回呼ばれたことを検証
         verify(repository, times(1)).findById(1L);
-        // save()が1回呼ばれたことを検証
         verify(repository, times(1)).save(existing);
     }
 
     // ----------------------------------------------
-    // 異常系テスト（エラーや例外が発生するケースのテスト）
+    // 異常系テスト
     // ----------------------------------------------
 
-    @Test // [個別取得失敗] findById()で存在しないIDを検索するとnullが返ることをテスト
+    /**
+     * [個別取得失敗] findById() で存在しない ID を検索すると null が返ることを確認するテスト
+     */
+    @Test
     public void testFindById_notFound() {
-        // 存在しないIDの時は空のOptionalを返すように設定
+        // 前準備 (Given)
         when(repository.findById(1L)).thenReturn(Optional.empty());
 
-        // findById()の結果はnullになるはず
+        // 実行 (When)
         Employee result = service.findById(1L);
 
-        // nullであることをテスト
+        // 確認 (Then)
         assertNull(result);
     }
 
-    @Test // [更新失敗] updateEmployee()で存在しないIDなら例外がスローされ、saveされないことをテスト
-    public void testUpdateEmployee_notFound_throws() {
-        // 更新用社員オブジェクトを作成
+    /**
+     * [更新失敗] 対象が存在しない場合、NOT_FOUND を返し save() が呼ばれないことを確認するテスト
+     */
+    @Test
+    public void testUpdateEmployee_notFound_returnsStatus_andNoSave() {
+        // 前準備 (Given)
         Employee updated = new Employee();
         updated.setId(1L);
         updated.setName("新名");
         updated.setMyNumber("123456789012");
         updated.setEmployeeCode("E002");
         updated.setRemarks("備考更新");
-
-        // 存在しないIDの場合は空のOptionalを返すように設定
         when(repository.findById(1L)).thenReturn(Optional.empty());
 
-        // updateEmployee()を呼んだらRuntimeExceptionが発生することをテスト
-        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
-            service.updateEmployee(updated);
-        });
+        // 実行 (When)
+        String status = service.updateEmployee(updated);
 
-        // 例外メッセージをテスト
-        assertEquals("該当従業員が存在しません", exception.getMessage());
-
-        // findById()が1回呼ばれたことを検証
+        // 確認 (Then)
+        assertEquals("NOT_FOUND", status);
         verify(repository, times(1)).findById(1L);
-        // save()は呼ばれていないことを検証
+        verify(repository, never()).save(any());
+    }
+
+    /**
+     * [更新失敗] 従業員コードが自分以外と重複する場合、DUPLICATE_CODE を返し保存しないことを確認するテスト
+     */
+    @Test
+    public void testUpdateEmployee_duplicateCode_returnsStatus_andNoSave() {
+        // 前準備 (Given)
+        Employee existing = new Employee();
+        existing.setId(1L);
+        existing.setEmployeeCode("E001");
+
+        Employee updated = new Employee();
+        updated.setId(1L);
+        updated.setEmployeeCode("E999");
+
+        when(repository.findById(1L)).thenReturn(Optional.of(existing));
+        when(repository.existsByEmployeeCodeAndIdNot("E999", 1L)).thenReturn(true);
+
+        // 実行 (When)
+        String status = service.updateEmployee(updated);
+
+        // 確認 (Then)
+        assertEquals("DUPLICATE_CODE", status);
+        verify(repository, never()).save(any());
+    }
+
+    /**
+     * [更新失敗] マイナンバーが自分以外と重複する場合、DUPLICATE_MYNUMBER を返し保存しないことを確認するテスト
+     */
+    @Test
+    public void testUpdateEmployee_duplicateMyNumber_returnsStatus_andNoSave() {
+        // 前準備 (Given)
+        Employee existing = new Employee();
+        existing.setId(1L);
+        existing.setMyNumber("000000000000");
+
+        Employee updated = new Employee();
+        updated.setId(1L);
+        updated.setMyNumber("123456789012");
+
+        when(repository.findById(1L)).thenReturn(Optional.of(existing));
+        when(repository.existsByEmployeeCodeAndIdNot(any(), anyLong())).thenReturn(false);
+        when(repository.existsByMyNumberAndIdNot("123456789012", 1L)).thenReturn(true);
+
+        // 実行 (When)
+        String status = service.updateEmployee(updated);
+
+        // 確認 (Then)
+        assertEquals("DUPLICATE_MYNUMBER", status);
         verify(repository, never()).save(any());
     }
 }

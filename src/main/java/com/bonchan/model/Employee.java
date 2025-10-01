@@ -10,14 +10,14 @@ import jakarta.validation.constraints.Size;
 public class Employee {
 
     // ----------------------------
-    // 主キー（自動採番）
+    // ▫️主キー（自動採番）
     // ----------------------------
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     // ----------------------------
-    // 従業員コード（ユーザー入力）
+    // ▫️従業員コード（ユーザー入力）
     // - DB制約: NOT NULL, UNIQUE
     // - バックエンド: 必須チェック（@NotBlank）
     // ----------------------------
@@ -26,7 +26,7 @@ public class Employee {
     private String employeeCode;
 
     // ----------------------------
-    // 氏名
+    // ▫️氏名
     // - DB制約: NOT NULL
     // - バックエンド: 必須チェック（@NotBlank）, 最大文字数制限
     // ----------------------------
@@ -36,23 +36,23 @@ public class Employee {
     private String name;
 
     // ----------------------------
-    // マイナンバー（12桁）
+    // ▫️マイナンバー（12桁）
     // - DB制約: UNIQUE, NULL許容
     // - バックエンド: 任意入力、入力があれば12桁チェック
     // ----------------------------
     @Column(unique = true, length = 12)
-    @Pattern(regexp = "\\d{12}", message = "マイナンバーは12桁の数字で入力してください")
+    @Pattern(regexp = "^$|\\d{12}", message = "マイナンバーは未入力または12桁の数字で入力してください")
     private String myNumber;
 
     // ----------------------------
-    // 登録日
+    // ▫️登録日
     // - DB制約: NULL許容
     // - バックエンド: 自動セット（登録時）
     // ----------------------------
     private LocalDate registeredAt;
 
     // ----------------------------
-    // 備考（任意）
+    // ▫️備考（任意）
     // - DB制約: 最大255文字
     // - バックエンド: 最大文字数制限
     // ----------------------------
@@ -61,7 +61,7 @@ public class Employee {
     private String remarks;
 
     // ---------------------------------------
-    // getter / setter
+    // ▫️getter / setter
     // ---------------------------------------
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }

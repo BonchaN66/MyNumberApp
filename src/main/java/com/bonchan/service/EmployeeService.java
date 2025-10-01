@@ -72,7 +72,7 @@ public class EmployeeService {
             return "NOT_FOUND";
         }
 
-        // employeeCode の重複チェック（自分以外）
+        // employeeCode の重複チェック（既登録の自分以外）
         if (repository.existsByEmployeeCodeAndIdNot(updatedEmployee.getEmployeeCode(), updatedEmployee.getId())) {
             return "DUPLICATE_CODE";
         }
@@ -112,5 +112,25 @@ public class EmployeeService {
      */
     public Employee findById(Long id) {
         return repository.findById(id).orElse(null);
+    }
+
+    /**
+     * 従業員コードの重複チェック
+     *
+     * @param employeeCode 従業員コード
+     * @return true: 存在する / false: 存在しない
+     */
+    public boolean existsByEmployeeCode(String employeeCode) {
+        return repository.existsByEmployeeCode(employeeCode);
+    }
+
+    /**
+     * マイナンバーの重複チェック
+     *
+     * @param myNumber マイナンバー
+     * @return true: 存在する / false: 存在しない
+     */
+    public boolean existsByMyNumber(String myNumber) {
+        return repository.existsByMyNumber(myNumber);
     }
 }
