@@ -1,61 +1,97 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>マイナンバー編集</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" th:href="@{/css/style.css}">
-</head>
-<body>
-
-<div class="form-page page-content">
-    <h1>編集フォーム</h1>
-    <form th:action="@{/update}" th:object="${employee}" method="post">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+  </head>
+  <body>
+    <div class="form-page page-content">
+      <h1>編集フォーム</h1>
+      <form th:action="@{/update}" th:object="${employee}" method="post">
         <!-- 主キー（id）を hidden で送る -->
         <input type="hidden" th:field="*{id}" />
 
         <!-- 従業員コード -->
-        <!-- フロント側チェック: 必須（required） -->
-        <!-- バックエンド側チェック: NOT NULL, UNIQUE 制約 -->
         <div class="form-group">
-            <label for="employeeCode">従業員コード <span style="color:red">*</span>：</label>
-            <input type="text" id="employeeCode" th:field="*{employeeCode}" maxlength="20" required />
+          <label for="employeeCode"
+            >従業員コード <span class="required">*</span>：</label
+          >
+          <input
+            type="text"
+            id="employeeCode"
+            th:field="*{employeeCode}"
+            maxlength="20"
+            required
+          />
+          <div
+            th:if="${#fields.hasErrors('employeeCode')}"
+            th:errors="*{employeeCode}"
+            class="error"
+          ></div>
         </div>
 
         <!-- 氏名 -->
-        <!-- フロント側チェック: 必須（required） -->
-        <!-- バックエンド側チェック: NOT NULL -->
         <div class="form-group">
-            <label for="name">氏名 <span style="color:red">*</span>：</label>
-            <input type="text" id="name" th:field="*{name}" maxlength="50" required />
+          <label for="name">氏名 <span class="required">*</span>：</label>
+          <input
+            type="text"
+            id="name"
+            th:field="*{name}"
+            maxlength="50"
+            required
+          />
+          <div
+            th:if="${#fields.hasErrors('name')}"
+            th:errors="*{name}"
+            class="error"
+          ></div>
         </div>
 
         <!-- マイナンバー -->
-        <!-- フロント側チェック: 任意、入力がある場合は12桁数字のみ（pattern="\d{12}") -->
-        <!-- バックエンド側チェック: UNIQUE 制約（NULL 許容） -->
         <div class="form-group">
-            <label for="myNumber">マイナンバー（任意、12桁）：</label>
-            <input type="text" id="myNumber" th:field="*{myNumber}" pattern="\d{12}" maxlength="12"
-                   placeholder="未登録の場合は空欄可" title="マイナンバーは12桁の数字で入力してください"/>
+          <label for="myNumber">マイナンバー（任意、12桁）：</label>
+          <input
+            type="text"
+            id="myNumber"
+            th:field="*{myNumber}"
+            pattern="\d{12}"
+            maxlength="12"
+            placeholder="未登録の場合は空欄可"
+            title="マイナンバーは12桁の数字で入力してください"
+          />
+          <div
+            th:if="${#fields.hasErrors('myNumber')}"
+            th:errors="*{myNumber}"
+            class="error"
+          ></div>
         </div>
 
         <!-- 備考 -->
-        <!-- フロント側チェック: 任意、最大255文字 -->
-        <!-- バックエンド側チェック: 最大255文字 -->
         <div class="form-group">
-            <label for="remarks">備考（任意）：</label>
-            <textarea id="remarks" th:field="*{remarks}" rows="4" maxlength="255"></textarea>
+          <label for="remarks">備考（任意）：</label>
+          <textarea
+            id="remarks"
+            th:field="*{remarks}"
+            rows="4"
+            maxlength="255"
+          ></textarea>
+          <div
+            th:if="${#fields.hasErrors('remarks')}"
+            th:errors="*{remarks}"
+            class="error"
+          ></div>
         </div>
 
         <!-- 更新ボタン -->
         <div class="form-actions">
-            <button type="submit" class="btn btn-update">更新</button>
+          <button type="submit" class="btn btn-update">更新</button>
         </div>
-    </form>
+      </form>
 
-    <!-- 一覧へ戻るリンク -->
-    <a href="/list" style="margin-top: 20px; display: block; text-align: center;">一覧へ戻る</a>
-</div>
-
-</body>
+      <!-- 一覧へ戻るリンク -->
+      <a href="/list" class="back-link">一覧へ戻る</a>
+    </div>
+  </body>
 </html>
