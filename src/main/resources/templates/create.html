@@ -2,17 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
-    <title>マイナンバー編集</title>
+    <title>マイナンバー新規登録</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" th:href="@{/css/style.css}" />
   </head>
   <body>
     <div class="form-page page-content">
-      <h1>編集フォーム</h1>
-      <form th:action="@{/update}" th:object="${employee}" method="post">
-        <!-- 主キー（id）を hidden で送る -->
-        <input type="hidden" th:field="*{id}" />
-
+      <h1>新規登録フォーム</h1>
+      <form th:action="@{/register}" th:object="${employee}" method="post">
         <!-- 従業員コード -->
         <div class="form-group">
           <label for="employeeCode"
@@ -84,9 +81,9 @@
           ></div>
         </div>
 
-        <!-- 更新ボタン -->
+        <!-- 登録ボタン -->
         <div class="form-actions">
-          <button type="submit" class="btn btn-update">更新</button>
+          <button type="submit" class="btn btn-submit">登録</button>
         </div>
       </form>
 
