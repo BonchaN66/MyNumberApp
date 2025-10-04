@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
 import useSmoothScroll from "../hooks/useSmoothScroll"; // 💡 カスタムフックをインポート
-import "tailwindcss";
 
 export default function LandingWithHero() {
   const [showIntro, setShowIntro] = useState(true);
